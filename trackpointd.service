@@ -1,0 +1,9 @@
+[Unit]
+Description=Daemon for setting the track point
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /usr/bin/trackpointd.py
+
+[Install]
+WantedBy=multi-user.target

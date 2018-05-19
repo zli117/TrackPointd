@@ -7,6 +7,7 @@ import os
 import time
 
 CONFIG_FILE = '/etc/trackpointd.conf'
+WAIT_TIMEOUT = 60 # Wait 60 seconds for a file to show up
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -39,17 +40,23 @@ def main_loop(config_path):
         dir = config['dir']
         for file, value in config.items():
             file = os.path.join(dir, file)
-            if os.access(file, os.R_OK):
-                with open(file, 'r+') as f:
-                    cur_val = f.read().strip()
-                    if cur_val != value and os.access(file, os.W_OK):
-                        logging.info('Writing %s to %s' % (value, file))
-                        f.write(value)
+
+            for i in range(WAIT_TIMEOUT):
+                if os.access(file, os.R_OK):
+                    break
+                time.sleep(1)
+            else:
+                raise RuntimeError('File %s does not exist' % file)
+
+            with open(file, 'r+') as f:
+                cur_val = f.read().strip()
+                if cur_val != value and os.access(file, os.W_OK):
+                    logging.info('Writing %s to %s' % (value, file))
+                    f.write(value)
         time.sleep(60)
 
 
 if __name__ == '__main__':
     logging.info('trackpointd started')
 
-    time.sleep(15) # wait for the files to show up
     main_loop(CONFIG_FILE)

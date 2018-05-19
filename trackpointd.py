@@ -37,7 +37,11 @@ def config_loader(path):
 def main_loop(config_path):
     while True:
         config = config_loader(config_path)
-        dir = config['dir']
+        dir = config.pop('dir', None)
+        if dir is None:
+            raise RuntimeError(
+                    'You need to specify where the hardware settings are'
+            )
         for file, value in config.items():
             file = os.path.join(dir, file)
 
@@ -57,6 +61,5 @@ def main_loop(config_path):
 
 
 if __name__ == '__main__':
-    logging.info('trackpointd started')
-
     main_loop(CONFIG_FILE)
+

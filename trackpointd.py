@@ -61,5 +61,6 @@ def main_loop(config_path):
 
 
 if __name__ == '__main__':
+    time.sleep(5)
     main_loop(CONFIG_FILE)
 

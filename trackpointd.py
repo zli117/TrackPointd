@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 The daemon for automatically set the track point sensitivity
 """

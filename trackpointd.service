@@ -3,7 +3,7 @@ Description=Daemon for setting the track point
 
 [Service]
 Type=simple
-ExecStart=env python3 /usr/bin/trackpointd.py
+ExecStart=/usr/bin/env python3 /usr/bin/trackpointd.py
 
 [Install]
 WantedBy=multi-user.target

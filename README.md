@@ -1,5 +1,5 @@
 # TrackPointd
-systemd service for setting up Thinkpad trackpoint automatically
+Service for setting up Thinkpad trackpoint automatically
 
  - Install: `sudo python3 setup.py install`
  - Modify `/etc/trackpointd.conf` to configure speed, sensitivity, and drift time

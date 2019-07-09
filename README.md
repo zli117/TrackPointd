@@ -9,7 +9,7 @@ systemd service for setting up Thinkpad trackpoint automatically
  sudo systemctl start trackpointd
  ```
 
- - Enable the server to start automatically on boot:
+ - Enable the service to start automatically on boot:
 
  ```bash
  sudo systemctl enable trackpointd
